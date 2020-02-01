@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Configure the WorkshopCloudFormationStackSetExecutionRole to enable use of your account as a target account in AWS CloudFormation StackSets.
+
+Parameters:
+  AdministratorAccountId:
+    Type: String
+    Description: AWS Account Id of the administrator account (the account in which StackSets will be created).
+    MaxLength: 12
+    MinLength: 12
+
+Resources:
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: WorkshopCloudFormationStackSetExecutionRole
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS:
+                - !Ref AdministratorAccountId
+            Action:
+              - sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/IAMFullAccess
+        - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+        - arn:aws:iam::aws:policy/AmazonSNSFullAccess
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess

@@ -1,9 +1,6 @@
 #Service Control Policies
 
-
 [SCP][1]
-
-
 ![SCP Syntax][syntax]
 
 

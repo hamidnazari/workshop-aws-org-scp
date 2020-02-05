@@ -12,3 +12,14 @@ repetitive way of doing this.
 you will reach this limit as more statements are added to your policy.
 
 
+
+
+
+Further Reading:
+
+[SCP][1] policies syntax is similiar to that of IAM, with few exceptions :
+
+
+![SCP Syntax](../images/SCP_Syntax.png)
+
+[1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html

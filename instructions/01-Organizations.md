@@ -15,25 +15,23 @@ First, we are going to need a couple of AWS accounts.
 ![create option](../images/acc_create.png)
 
 1. Add an account with the following details:
-    * **Full name:** `Workshop Account 1`
-      **Email:** `yourusername+account1@yourgoogledomain`
+    * **Full name:** `Workshop Account 1`  
+      **Email:** `yourusername+account1@yourgoogledomain`  
       **IAM role name:** (leave blank) `OrganizationAccountAccessRole`
 
 ![create option](../images/acc1_create.png)
 
 ![Account 1](../images/AWS_org_acc1.png)
-account, using AWS CLI.
+1. Now create a second account, using AWS CLI.
     1. Open `Makefile`.
     1. Modify `ACC2_EMAIL` variable to `yourusername+account2@yourgoogledomain`
     1. Add the following command to the `account2` target:
-
         ```Makefile
         aws organizations create-account \
         	--account-name '$(ACC2_NAME)' \
         	--email '$(ACC2_EMAIL)'
         ```
     1. Run
-
        ```Bash
         $ make account2
         ```
@@ -41,7 +39,7 @@ account, using AWS CLI.
   ![bash create](../images/bash_acc2.png)
 
 1. Go back to **AWS Organizations** and note account numbers for your master
-   account as well as the two new accounts we just created.
+   account as well as the two new accounts we just created.  
    This may take a minute to show.
    
 ![Accounts](../images/org_acc_list.png)
@@ -54,16 +52,16 @@ Let's access these accounts.
 <img />
 
 1. Enter the following details:
-    * **Account:** (Account 1's number)
-      **Role:** OrganizationAccountAccessRole
-      **Display Name:** Workshop Account 1
+    * **Account:** (Account 1's number)  
+      **Role:** OrganizationAccountAccessRole  
+      **Display Name:** Workshop Account 1  
       **Color:** Yellow (3rd box from the left)
 
     From the context menu, click on **Switch Role** again.
 
-    * **Account:** (Account 2's number)
-      **Role:** OrganizationAccountAccessRole
-      **Display Name:** Workshop Account 2
+    * **Account:** (Account 2's number)  
+      **Role:** OrganizationAccountAccessRole  
+      **Display Name:** Workshop Account 2  
       **Color:** Blue (5th box from the left)
 
 You can now switch between your accounts with only a couple of clicks.

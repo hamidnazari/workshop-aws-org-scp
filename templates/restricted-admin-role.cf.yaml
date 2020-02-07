@@ -9,10 +9,10 @@ Parameters:
     MinLength: 12
 
 Resources:
-  ResterictedAdminRole:
+  RestrictedAdminRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: ResterictedAdminRole
+      RoleName: RestrictedAdminRole
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:

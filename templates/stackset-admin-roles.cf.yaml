@@ -25,3 +25,27 @@ Resources:
                   - sts:AssumeRole
                 Resource:
                   - "arn:aws:iam::*:role/WorkshopCloudFormationStackSetExecutionRole"
+
+  BootstrappingRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: WorkshopCloudFormationStackSetBoostrapRole
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: cloudformation.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: AssumeRole-OrganizationAccountAccessRole
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sts:AssumeRole
+                Resource:
+                  - "arn:aws:iam::*:role/OrganizationAccountAccessRole"

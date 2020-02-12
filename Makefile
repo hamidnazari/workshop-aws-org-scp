@@ -21,6 +21,11 @@ account2:
 stackset-admin-roles:
 	@echo "Deploying StackSet Admin Role CloudFormation Stack"
 	# Add AWS CLI command for StackSet Admin Roles CloudFormation Stack here
+	aws cloudformation $(ACTION)-stack \
+		--region $(REGION) \
+		--stack-name $(STACKSETADMIN_STACKNAME) \
+		--capabilities CAPABILITY_NAMED_IAM \
+		--template-body file://./templates/stackset-admin-roles.cf.yaml
 
 restricted-admin-role:
 	@echo "Deploying Restricted Admin Role CloudFormation StackSet"

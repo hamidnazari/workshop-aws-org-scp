@@ -104,7 +104,10 @@ Okay, now let's create a region restricted policy using the CLI.
 
 1.  Add the following command to the `region-lock-scp` target in `Makefile`:
     ```Makefile
-    aws organizations $(ACTION)-policy --content file://region-lock-scp.json --name RegionLock --description '' --type SERVICE_CONTROL_POLICY
+    aws organizations $(ACTION)-policy \
+    	--content file://./templates/region-lock-scp.json \
+    	--name RegionLock --description '' \
+    	--type SERVICE_CONTROL_POLICY
     ```
 
 1.  And these to the `region-lock-attachment` target:

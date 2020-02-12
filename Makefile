@@ -14,6 +14,9 @@ RESTRICTEDADMIN_STACKSETNAME=workshop-restricted-admin
 account2:
 	@echo "Creating an Account named '$(ACC2_NAME)' using '$(ACC2_EMAIL)'"
 	# Add AWS CLI command for Workshop Account 2 here
+	aws organizations create-account \
+		--account-name '$(ACC2_NAME)' \
+		--email '$(ACC2_EMAIL)'
 
 stackset-admin-roles:
 	@echo "Deploying StackSet Admin Role CloudFormation Stack"

@@ -30,10 +30,22 @@ stackset-admin-roles:
 restricted-admin-role:
 	@echo "Deploying Restricted Admin Role CloudFormation StackSet"
 	# Add AWS CLI command for Restricted Admin Role CloudFormation StackSet here
+	aws cloudformation $(ACTION)-stack-set \
+		--region $(REGION) \
+		--stack-set-name $(RESTRICTEDADMIN_STACKSETNAME) \
+		--capabilities CAPABILITY_NAMED_IAM \
+		--administration-role-arn arn:aws:iam::$(MASTER_ACC_NUMBER):role/WorkshopCloudFormationStackSetAdministrationRole \
+		--execution-role-name WorkshopCloudFormationStackSetExecutionRole \
+		--template-body file://./templates/restricted-admin-role.cf.yaml \
+		--parameters ParameterKey=AdministratorAccountId,ParameterValue=$(MASTER_ACC_NUMBER)
 
 restricted-admin-role-accounts:
 	@echo "Adding Accounts to Restricted Admin Role CloudFormation StackSet"
 	# Add AWS CLI command for Restricted Admin Role CloudFormation StackSet Accounts here
+	aws cloudformation $(ACTION)-stack-instances \
+		--stack-set-name $(RESTRICTEDADMIN_STACKSETNAME) \
+		--accounts $(ACC1_NUMBER) $(ACC2_NUMBER) \
+		--regions $(REGION)
 
 region-lock-scp:
 	@echo "Creating RegionLock Service Control Policy"

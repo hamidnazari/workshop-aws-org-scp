@@ -25,3 +25,40 @@ Resources:
       Path: /
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/IAMFullAccess
+      PermissionsBoundary: !Ref RestrictedAdminPermissionsBoundaryPolicy
+
+  RestrictedAdminPermissionsBoundaryPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: RestrictedAdminPermissionsBoundaryPolicy
+      Description: Policy for RestrictedAdmin Role and IAM entitites managed by it
+      Path: "/"
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: GeneralRestrictions
+            Effect: Deny
+            Action:
+              - ec2:*NetworkAcl*
+              - ec2:*Subnet*
+              - ec2:*Vpc*
+              - ec2:*Endpoint*
+              - ec2:*Vpn*
+              - ec2:*Gateway*
+              - ec2:*Route*
+              - cloudtrail:*
+            Resource: '*'
+          - Sid: RestrictedIAM
+            Effect: Deny
+            Action:
+              - iam:CreateRole
+              - iam:AttachRolePolicy
+              - iam:PutRolePermissionsBoundary
+              - iam:TagRole
+              - iam:UntagRole
+              - iam:UpdateRole*
+            Resource: '*'
+            Condition:
+              StringNotEquals:
+                iam:PermissionsBoundary:
+                - !Sub "arn:aws:iam::${AWS::AccountId}:policy/RestrictedAdminPermissionsBoundaryPolicy"

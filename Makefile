@@ -50,9 +50,12 @@ restricted-admin-role-accounts:
 region-lock-scp:
 	@echo "Creating RegionLock Service Control Policy"
 	# Add AWS CLI command for RegionLock Service Control Policy Creation here
+	aws organizations $(ACTION)-policy --content file://./templates/region-lock-scp.json --name RegionLock --description '' --type SERVICE_CONTROL_POLICY
 
 region-lock-attachment:
 	@echo "Attaching RegionLock Service Control Policy"
 	# Add AWS CLI command for RegionLock Service Control Policy Attachment here
+	aws organizations attach-policy --target-id $(ACC1_NUMBER) --policy-id $(POLICY_ID)
+	aws organizations attach-policy --target-id $(ACC2_NUMBER) --policy-id $(POLICY_ID)
 
 .PHONY: account2 stackset-admin-roles restricted-admin-role restricted-admin-role-accounts region-lock-scp

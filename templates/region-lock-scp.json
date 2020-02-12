@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Deny",
+    "Action": "*",
+    "Resource": "*",
+    "Condition": {
+      "StringNotEquals": {
+        "aws:RequestedRegion": [
+          "ap-southeast-2",
+          "us-east-1"
+        ]
+      }
+    }
+  }]
+}
